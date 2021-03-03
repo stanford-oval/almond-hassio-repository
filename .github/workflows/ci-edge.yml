@@ -1,0 +1,32 @@
+name: CI-edge
+
+on:
+  #schedule:
+  #  - cron: '0 10 * * *'
+  repository_dispatch:
+    types: [ev-edge]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+      - name: Fetch release version
+        run: |
+          REV=$(git ls-remote https://github.com/stanford-oval/almond-server refs/heads/master | cut -c1-7)
+          sed -i 's@"version":.*@"version": "edge-'${REV}'",@' edge/config.json
+      - name: Check for modified files
+        id: git-check
+        run: echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
+      - name: Commit latest release version
+        if: steps.git-check.outputs.modified == 'true'
+        run: |
+          FV=$(grep -oe '"edge-\(.*\)"' edge/config.json | cut -d'"' -f2)
+          git config --global user.name 'buildbot'
+          git config --global user.email 'gh-buildbot@users.noreply.github.com'
+          git commit -am "Release version ${FV}"
+          git push
