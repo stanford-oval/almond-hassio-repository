@@ -5,7 +5,7 @@ FROM ${BUILD_FROM}
 ENV \
     LANG="en_US.utf8" \
     THINGENGINE_HOME="/data/almond-server" \
-    THINGENGINE_HOST_BASED_AUTHENTICATION="local-ip"
+    THINGENGINE_HAS_REVERSE_PROXY=true
 
 WORKDIR /opt/almond
 ARG ALMOND_VERSION
@@ -16,31 +16,42 @@ WORKDIR /opt/almond
 
 RUN \
     set -x \
-    && apk add --no-cache \
-        nodejs \
-        npm \
-        yarn \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
+        build-essential \
+        libcanberra-dev \
+        libcanberra0 \
+        libpulse-dev \
+        libatlas-base-dev \
+        libatlas3-base \
+        pkg-config \
+        git \
+        gnupg \
         nginx \
+        python-dev \
+        software-properties-common \
         unzip \
-        blas \
         sqlite \
         coreutils \
-        libcanberra \
-        libpulse \
         pulseaudio \
         gettext \
         zip \
         sudo \
-    && apk add --no-cache --virtual .build-dependencies \
-        build-base \
-        blas-dev \
-        libcanberra-dev \
-        pulseaudio-dev \
-        git \
-        linux-headers \
-        sqlite-dev \
-        pkgconf \
-        python2 \
+        wget \
+    \
+    && curl -sS https://deb.nodesource.com/gpgkey/nodesource.gpg.key \
+        | apt-key add - \
+    && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg \
+        | apt-key add - \
+    && echo "deb https://deb.nodesource.com/node_12.x buster main" \
+        > /etc/apt/sources.list.d/nodesource.list \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" \
+        > /etc/apt/sources.list.d/yarn.list \
+    \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
+        nodejs \
+        yarn \
     \
     && npm config set unsafe-perm \
     \
@@ -54,8 +65,16 @@ RUN \
     rm -fr /home/almond/.cache && \
     rm -fr /home/almond/.npm && \
     mkdir /home/almond/.cache \
-    && apk del --no-cache \
-        .build-dependencies \
+    && apt-get purge -y --auto-remove \
+        build-essential \
+        libcanberra-dev \
+        libpulse-dev \
+        libatlas-base-dev \
+        pkg-config \
+        git \
+        gnupg \
+        python-dev \
+        software-properties-common \
     \
     && rm -rf \
         /opt/almond/.[!.]* \
@@ -64,6 +83,9 @@ RUN \
         /tmp/.[!.]* \
         /tmp/* \
         /usr/local/share/.cache \
-        /usr/local/share/.config
+        /usr/local/share/.config \
+        /usr/lib/nginx \
+        /var/lib/apt/lists/* \
+        /var/www
 
 COPY rootfs /
