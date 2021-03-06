@@ -26,9 +26,15 @@ almond_config=$(\
         isHassio "^true" \
 )
 
+if [ ! -f /data/almond-server/prefs.db ]; then
+    touch /data/almond-server/prefs.db
+fi
+accessToken="$(cat /dev/urandom | tr -cd "a-zA-Z0-9" | head -c ${2:-32})"
+jq --arg token "$accessToken" '."access-token" = $token' /data/almond-server/prefs.db
+
 # Create Home Assistant entry in Almond service
 if curl \
-    -f -s -X POST -H "Content-Type: application/json" \
+    -f -s -X POST -H "Content-Type: application/json" -H "Authorization: Bearer ${accessToken}" \
     -d "${almond_config}" \
     "http://127.0.0.1:3000/api/devices/create"
 then
