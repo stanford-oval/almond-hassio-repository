@@ -2,9 +2,10 @@
 <head>
 </head>
 <body>
-redirecting to Almond Web UI ...
 <script>
-	window.top.location.href = 'http://' + window.location.hostname + ':9320';
+	var url = window.location.protocol + '//' + window.location.hostname + ':9320';
+	// window.top.location.href = url;
+	window.open(url, "_blank");
 </script>
 </body>
 </html>
