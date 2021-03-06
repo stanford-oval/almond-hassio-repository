@@ -2,4 +2,14 @@
 # ==============================================================================
 # Start NGINX service
 # ==============================================================================
+
+# Check if SSL is enabled and modify nginx config accordingly
+if [ -f "/ssl/fullchain.pem" ] && [ -f "/ssl/privkey.pem" ]; then
+    sed -e "s/#\(ssl_.*\)/\1/" \
+        -e "s@{SSL_CERTFILE}@/ssl/fullchain.pem@" \
+        -e "s@{SSL_PRIVKEY}@/ssl/privkey.pem@" \
+        -e "s/9320 default_server;/9320 ssl default_server;/" \
+        -i /etc/nginx/nginx.conf
+fi
+
 exec nginx
