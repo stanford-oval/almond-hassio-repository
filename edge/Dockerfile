@@ -34,6 +34,7 @@ RUN \
         sqlite \
         coreutils \
         pulseaudio \
+        pulseaudio-utils \
         gettext \
         zip \
         sudo \
