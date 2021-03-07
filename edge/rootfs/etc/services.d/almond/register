@@ -5,6 +5,14 @@
 declare access_token_expires
 declare almond_config
 
+# Set random access token in Almond
+if [ ! -f /data/almond-server/prefs.db ]; then
+    touch /data/almond-server/prefs.db
+fi
+accessToken=$(head -c256 /dev/urandom | tr -cd 'a-zA-Z0-9' | head -c ${2:-32})
+jq --raw-output --arg token "$accessToken" '."access-token" = $token' /data/almond-server/prefs.db > /tmp/.prefs.tmp
+mv /tmp/.prefs.tmp /data/almond-server/prefs.db
+
 # Wait for Almond service to be available
 bashio::net.wait_for 3000
 
@@ -25,12 +33,6 @@ almond_config=$(\
         accessTokenExpires "^${access_token_expires}" \
         isHassio "^true" \
 )
-
-if [ ! -f /data/almond-server/prefs.db ]; then
-    touch /data/almond-server/prefs.db
-fi
-accessToken="$(cat /dev/urandom | tr -cd "a-zA-Z0-9" | head -c ${2:-32})"
-jq --arg token "$accessToken" '."access-token" = $token' /data/almond-server/prefs.db
 
 # Create Home Assistant entry in Almond service
 if curl \
