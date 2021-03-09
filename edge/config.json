@@ -17,7 +17,17 @@
   "ports": {
     "9320/tcp": 9320
   },
-  "options": {},
-  "schema": {},
+  "options": {
+    "ssl": {
+      "certfile": "fullchain.pem",
+      "keyfile": "privkey.pem"
+    }
+  },
+  "schema": {
+    "ssl": {
+      "certfile": "str",
+      "keyfile": "str"
+    }
+  },
   "image": "stanfordoval/almond-hassio-addon-{arch}"
 }
