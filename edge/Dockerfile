@@ -39,6 +39,9 @@ RUN \
         zip \
         sudo \
         wget \
+        gstreamer1.0-plugins-base-apps \
+        gstreamer1.0-plugins-good \
+        gstreamer1.0-pulseaudio \
     \
     && curl -sS https://deb.nodesource.com/gpgkey/nodesource.gpg.key \
         | apt-key add - \
