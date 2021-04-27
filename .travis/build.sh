@@ -20,7 +20,7 @@ set -ex
 echo "Running in $(pwd)"
 
 for arch in ${ARCHS}; do
-	docker run --rm --name hassio-builder --privileged \
+	docker run --rm --name hassio-builder --privileged -ti \
 		-v "$(pwd)":/data \
 		-v ~/.docker:/root/.docker \
 		-v /var/run/docker.sock:/var/run/docker.sock:ro \

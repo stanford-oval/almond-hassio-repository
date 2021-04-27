@@ -13,13 +13,13 @@ before_install:
 - docker --version
 jobs:
   include:
-  - stage: Build Edge Docker Image (armv7) and deploy to Docker Hub
+  - name: Build Edge Docker Image (armv7) and deploy to Docker Hub
     script:
     - ARCHS="armv7" TEST=0 travis_wait 120 $TRAVIS_BUILD_DIR/.travis/build.sh edge
-  - stage: Build Edge Docker Image (aarch64) and deploy to Docker Hub
+  - name: Build Edge Docker Image (aarch64) and deploy to Docker Hub
     script:
     - ARCHS="aarch64" TEST=0 travis_wait 120 $TRAVIS_BUILD_DIR/.travis/build.sh edge
-  - stage: Build Edge Docker Image (amd64) and deploy to Docker Hub
+  - name: Build Edge Docker Image (amd64) and deploy to Docker Hub
     script:
     - ARCHS="amd64" TEST=0 travis_wait 120 $TRAVIS_BUILD_DIR/.travis/build.sh edge
 env:
