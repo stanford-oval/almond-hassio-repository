@@ -1,0 +1,28 @@
+branches:
+  except:
+  - "/^wip/"
+language: shell
+services:
+- docker
+before_install:
+- curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+- sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+- sudo apt-get update
+- sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+- chmod +x $TRAVIS_BUILD_DIR/.travis/build.sh
+- docker --version
+jobs:
+  include:
+  - stage: Build Edge Docker Image (armv7) and deploy to Docker Hub
+    script:
+    - ARCHS="armv7" TEST=0 travis_wait 120 $TRAVIS_BUILD_DIR/.travis/build.sh edge
+  - stage: Build Edge Docker Image (aarch64) and deploy to Docker Hub
+    script:
+    - ARCHS="aarch64" TEST=0 travis_wait 120 $TRAVIS_BUILD_DIR/.travis/build.sh edge
+  - stage: Build Edge Docker Image (amd64) and deploy to Docker Hub
+    script:
+    - ARCHS="amd64" TEST=0 travis_wait 120 $TRAVIS_BUILD_DIR/.travis/build.sh edge
+env:
+  global:
+  - secure: qFykKfOySCyU6Te4dHicl6lO+qIuOtMY1TkrpRI7ka1ZAFbtSx+4gwT0/u6cNTboUYQ3cO+4j2LkI8/mpSZYeRSNNrH+loCHefxjQNM35XV979uX2BDxOd2O3RtIjcn8xEDI+/OOBiviwRyYZhdmEKe8GvwkzXI4khzy3NzMCHsRTv0wLGiZqUrSP3Rg6fmOnc68hfUMZF11h4PXXJrdUDGcvUwYATocmDr3iT6MbwUjTs1278/9+Z0jE1ywcvvDFIF4xMcAqmUodbkiQYFBrigXeULB1S2CI+5udiPbdg7QoInNyCfv/yWmEuKi09vN3jS6WnlKQ69AfRNXr8hCJyhqdQ2242c8RG+fne52mnwqgeOn13Mwkg8gt/w69RDOYU6RAedPr4yN54CJPis1OelxwG12UfalT3AEezpuGEwyDZFyt5wLE8mAbkhez5e6402nEp23jboCVAQ50uGATCfdLld9R3QL3Oq1G/giO9eQjPGbxS/A5xNsNXpB5w75ZW+mnO0NvjYxbS8TW+07+LMNLVEYs8ry6bhGiHvmanpXK5j0UbI69WpPxta0AKU+WlNdiVpfYkvYgca1yk8w9DViytHYw6ytBRKH8/sinTOs47OrOFEEVbsMb27Sc3kZUiWhn0Z+9SVkF/L7cljeAX5mN2478BBQT/oYjE0EXOE=
+  - secure: J2YPQmZo371lmwBhnSSGfcGJChq4LiA0OF7L4z5MEVzXDZXegKWGC3AOPTtN8QxswbhUubT/cuG6O9c05H28E4u/594ftjvs19oyXWRhHZfc7aeHPbf2AHclZxbkcL0K6QSBxdj9Gxrk2H+8dHmmlA67VrpyR81jyWg7ZBS2u4bOyg+VfSv87kmtu5DY/tB+Vqd/NSHaYq3KpNnue+FWKnuUsIupHKlkbSgjUXNrGzmz2eylhkw82qJp1XqVyAxBR3Y52jn6AZVTS3j5yShlI6KjGEyEGGRQLY5GJOG2ZyfQypuF9Q+k2sI02EazQBvTAmsd4e+WSmqEXAYWKUEEGe0IBNqKfegu7zxf6h6fExkzEPjuCVSUahrHo14f3sfUghfKh7wO5zLb87GgDkelQus60H2+zy2oukknuoJRVO101K/MPhQoSaHZXXeOxFaB2ZK3XHnIWgA8aSS48YRf8RoZRqAeeWJ3VeP9nDi9ZCnq4ge0dIzsNOhnUEnIXnn9DkWFFmxtw2+PY9Rg8eHt6A/QAWMAA83Fzm2vhwuaVk4KrVbUKP3r00OmYC9Cl8lIhqMGwBaavgkIRiv+ds8dEyWaGuZD5ji4VtIANvgAm7DkAP6W3AdchbuadEQQ51OiHQiy7I9hr/iFKbGElSPBaO+YYQ+0s28eux25ZBS2puU=

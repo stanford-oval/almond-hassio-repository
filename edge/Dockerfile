@@ -25,6 +25,7 @@ RUN \
         libatlas-base-dev \
         libatlas3-base \
         pkg-config \
+        ca-certificates \
         git \
         gnupg \
         nginx \
@@ -58,6 +59,7 @@ RUN \
         "https://github.com/stanford-oval/almond-server" . && \
     sudo -u almond npm ci && \
     sudo -u almond npm install --no-package-lock --ignore-scripts snowboy && \
+    sudo -u almond npm install --no-package-lock github:stanford-oval/thingpedia-api && \
     cd node_modules/snowboy/ && \
     sudo -u almond PYTHON=python2 npx node-pre-gyp clean configure && \
     sudo -u almond make -C build/ && \
