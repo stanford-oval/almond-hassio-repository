@@ -1,6 +1,6 @@
 {
   "name": "Almond - Edge",
-  "version": "edge-a493c06",
+  "version": "edge-c6a715c",
   "slug": "edge",
   "description": "The home server version of Almond 2.0 (edge builds)",
   "url": "https://github.com/home-assistant/hassio-addons/blob/master/almond/edge",
