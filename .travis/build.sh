@@ -24,7 +24,7 @@ for arch in ${ARCHS}; do
 		-v "$(pwd)":/data \
 		-v ~/.docker:/root/.docker \
 		-v /var/run/docker.sock:/var/run/docker.sock:ro \
-		homeassistant/amd64-builder \
+		homeassistant/${arch}-builder \
 		-t /data \
 		--${arch} \
 		-i almond-hassio-addon-{arch} \

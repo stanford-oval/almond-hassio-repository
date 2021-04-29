@@ -4,22 +4,24 @@ branches:
 language: shell
 services:
 - docker
+dist: focal
+group: edge
 before_install:
-- curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-- sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-- sudo apt-get update
-- sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 - chmod +x $TRAVIS_BUILD_DIR/.travis/build.sh
 - docker --version
 jobs:
   include:
-  - name: Build Edge Docker Image (armv7) and deploy to Docker Hub
+  - name: armv7
+    arch: arm64-graviton2
+    virt: vm
     script:
     - ARCHS="armv7" TEST=0 travis_wait 120 $TRAVIS_BUILD_DIR/.travis/build.sh edge
-  - name: Build Edge Docker Image (aarch64) and deploy to Docker Hub
+  - name: aarch64
+    arch: arm64-graviton2
+    virt: vm
     script:
     - ARCHS="aarch64" TEST=0 travis_wait 120 $TRAVIS_BUILD_DIR/.travis/build.sh edge
-  - name: Build Edge Docker Image (amd64) and deploy to Docker Hub
+  - name: amd64
     script:
     - ARCHS="amd64" TEST=0 travis_wait 120 $TRAVIS_BUILD_DIR/.travis/build.sh edge
 env:
