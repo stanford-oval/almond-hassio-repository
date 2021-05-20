@@ -2,19 +2,4 @@
 # ==============================================================================
 # Start NGINX service
 # ==============================================================================
-
-SSL_CERTFILE="/ssl/fullchain.pem"
-SSL_KEYFILE="/ssl/privkey.pem"
-if bashio::config.has_value "ssl.certfile"; then SSL_CERTFILE="/ssl/$(bashio::config 'ssl.certfile')"; fi
-if bashio::config.has_value "ssl.keyfile"; then SSL_KEYFILE="/ssl/$(bashio::config 'ssl.keyfile')"; fi
-
-# Check if SSL is enabled and modify nginx config accordingly
-if [ -f "${SSL_CERTFILE}" ] && [ -f "${SSL_KEYFILE}" ]; then
-    sed -e "s/#\(ssl_.*\)/\1/" \
-        -e "s@{SSL_CERTFILE}@${SSL_CERTFILE}@" \
-        -e "s@{SSL_KEYFILE}@${SSL_KEYFILE}@" \
-        -e "s/9320 default_server;/9320 ssl default_server;/" \
-        -i /etc/nginx/nginx.conf
-fi
-
 exec nginx

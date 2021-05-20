@@ -7,7 +7,7 @@
   "arch": ["armv7", "armhf", "aarch64", "amd64"],
   "init": false,
   "discovery": ["almond"],
-  "map": ["ssl:ro"],
+  "webui": "http://[HOST]:[PORT:9320]",
   "ingress": true,
   "ingress_entry": "ingress.html",
   "audio": true,
