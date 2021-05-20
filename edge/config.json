@@ -7,27 +7,10 @@
   "arch": ["armv7", "armhf", "aarch64", "amd64"],
   "init": false,
   "discovery": ["almond"],
-  "webui": "http://[HOST]:[PORT:9320]",
   "ingress": true,
-  "ingress_entry": "ingress.html",
   "audio": true,
   "panel_icon": "mdi:comment-eye-outline",
   "homeassistant": "0.102.0",
   "homeassistant_api": true,
-  "ports": {
-    "9320/tcp": 9320
-  },
-  "options": {
-    "ssl": {
-      "certfile": "fullchain.pem",
-      "keyfile": "privkey.pem"
-    }
-  },
-  "schema": {
-    "ssl": {
-      "certfile": "str",
-      "keyfile": "str"
-    }
-  },
   "image": "stanfordoval/almond-hassio-addon-{arch}"
 }
