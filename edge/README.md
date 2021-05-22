@@ -1,10 +1,10 @@
 # Home Assistant Add-on: Almond
 
-[Almond] For Home Servers.
+[Almond] for Home Assistant servers.
 
 ![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield] ![Supports armhf Architecture][armhf-shield] ![Supports armv7 Architecture][armv7-shield] ![Supports i386 Architecture][i386-shield]
 
-The Open, Privacy-Preserving Virtual Assistant.
+"The Open, Privacy-Preserving Virtual Assistant."
 
 [Almond]: https://almond.stanford.edu/
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
