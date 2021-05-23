@@ -9,6 +9,6 @@ if ! bashio::fs.file_exists "${PREFS_DB}"; then
     mkdir -p "${THINGENGINE_HOME}"
     
     # Skip authentication handling
-    #echo '{"server-login":{"password":"x","salt":"x","sqliteKeySalt":"x"}}' \
-    #  > "${PREFS_DB}"
+    echo '{"server-login":{"password":"x","salt":"x","sqliteKeySalt":"x"}}' \
+      > "${PREFS_DB}"
 fi

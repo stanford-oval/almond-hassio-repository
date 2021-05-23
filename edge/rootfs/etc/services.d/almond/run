@@ -5,7 +5,7 @@
 export THINGENGINE_BASE_URL
 
 # Set the Ingress URL as Almond base URL for correct handling
-#THINGENGINE_BASE_URL=$(bashio::addon.ingress_entry)
+THINGENGINE_BASE_URL=$(bashio::addon.ingress_entry)
 
 # Send out discovery information to Home Assistant
 ./discovery &
