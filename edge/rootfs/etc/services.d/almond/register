@@ -28,7 +28,7 @@ almond_config=$(\
 
 # Create Home Assistant entry in Almond service
 if curl \
-    -f -s -X POST -H "Content-Type: application/json" -H "Authorization: Bearer ${accessToken}" \
+    -f -s -X POST -H "Content-Type: application/json" \
     -d "${almond_config}" \
     "http://127.0.0.1:3000/api/devices/create"
 then
