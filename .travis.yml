@@ -11,19 +11,32 @@ before_install:
 - docker --version
 jobs:
   include:
-  - name: armv7
+  - name: armv7 (edge)
     arch: arm64-graviton2
     virt: vm
     script:
     - ARCHS="armv7" TEST=0 travis_wait 120 $TRAVIS_BUILD_DIR/.travis/build.sh edge
-  - name: aarch64
+  - name: aarch64 (edge)
     arch: arm64-graviton2
     virt: vm
     script:
     - ARCHS="aarch64" TEST=0 travis_wait 120 $TRAVIS_BUILD_DIR/.travis/build.sh edge
-  - name: amd64
+  - name: amd64 (edge)
     script:
     - ARCHS="amd64" TEST=0 travis_wait 120 $TRAVIS_BUILD_DIR/.travis/build.sh edge
+  - name: armv7 (stable)
+    arch: arm64-graviton2
+    virt: vm
+    script:
+    - ARCHS="armv7" TEST=0 travis_wait 120 $TRAVIS_BUILD_DIR/.travis/build.sh stable
+  - name: aarch64 (stable)
+    arch: arm64-graviton2
+    virt: vm
+    script:
+    - ARCHS="aarch64" TEST=0 travis_wait 120 $TRAVIS_BUILD_DIR/.travis/build.sh stable
+  - name: amd64 (stable)
+    script:
+    - ARCHS="amd64" TEST=0 travis_wait 120 $TRAVIS_BUILD_DIR/.travis/build.sh stable
 env:
   global:
   - secure: qFykKfOySCyU6Te4dHicl6lO+qIuOtMY1TkrpRI7ka1ZAFbtSx+4gwT0/u6cNTboUYQ3cO+4j2LkI8/mpSZYeRSNNrH+loCHefxjQNM35XV979uX2BDxOd2O3RtIjcn8xEDI+/OOBiviwRyYZhdmEKe8GvwkzXI4khzy3NzMCHsRTv0wLGiZqUrSP3Rg6fmOnc68hfUMZF11h4PXXJrdUDGcvUwYATocmDr3iT6MbwUjTs1278/9+Z0jE1ywcvvDFIF4xMcAqmUodbkiQYFBrigXeULB1S2CI+5udiPbdg7QoInNyCfv/yWmEuKi09vN3jS6WnlKQ69AfRNXr8hCJyhqdQ2242c8RG+fne52mnwqgeOn13Mwkg8gt/w69RDOYU6RAedPr4yN54CJPis1OelxwG12UfalT3AEezpuGEwyDZFyt5wLE8mAbkhez5e6402nEp23jboCVAQ50uGATCfdLld9R3QL3Oq1G/giO9eQjPGbxS/A5xNsNXpB5w75ZW+mnO0NvjYxbS8TW+07+LMNLVEYs8ry6bhGiHvmanpXK5j0UbI69WpPxta0AKU+WlNdiVpfYkvYgca1yk8w9DViytHYw6ytBRKH8/sinTOs47OrOFEEVbsMb27Sc3kZUiWhn0Z+9SVkF/L7cljeAX5mN2478BBQT/oYjE0EXOE=

@@ -20,6 +20,8 @@ set -ex
 echo "Running in $(pwd)"
 
 for arch in ${ARCHS}; do
+	# pull the existing image for caching
+	docker pull almond-hassio-addon-{arch}
 	docker run --rm --name hassio-builder --privileged -i \
 		-v "$(pwd)":/data \
 		-v ~/.docker:/root/.docker \
