@@ -1,11 +1,10 @@
-# Almond Hass.io Unofficial Addon Repository
+# Almond Home Assistant OS Addon Repository
 
-The purpose of this repository is to host the development/testing/pre-release version of the Almond Hass.io Addon.
+The purpose of this repository is to host the Almond Home Assistant Addon.
+It contains both the development and the stable version.
 
-The releases are completely detached from the Official release of the Almond Hass.io Addon.
+Addons installed through this repository are not supported by Home Assistant.
 
-The official "stable" Almond Hass.io addon is integrated into hassio-addons and is available without adding this repository.
-
-## How to add this repository to your Hass.io installation
+## How to add this repository to your Home Assistant OS installation
 
 To install the addon contained in this repository, please, follow Home Assistant documentation on how to [Install Third-party Add-ons](https://home-assistant.io/hassio/installing_third_party_addons/)
