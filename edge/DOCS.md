@@ -9,6 +9,10 @@ Follow these steps to get the "Edge" add-on installed on your system:
 3. Find the "Almond - Edge" add-on and click it.
 4. Click on the "INSTALL" button.
 
+Alternatively use this button:
+
+[![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fstanford-oval%2Falmond-hassio-repository)
+
 ## How to use
 
 The basic thing to get the add-on running would be:
@@ -17,6 +21,8 @@ The basic thing to get the add-on running would be:
 2. Go to Home Assistant frontend -> **Configuration** -> **Integrations**
    to configure Home Assistant to use this add-on. After starting,
    it will be automatically discovered by Home Assistant.
+   
+   [![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=almond)
 
 ## Configuration
 
