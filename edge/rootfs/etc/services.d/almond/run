@@ -22,4 +22,4 @@ fi
 
 # Start Almond
 cd /opt/almond || bashio::exit.nok "Failed to change directory to Almond"
-exec node main.js
+exec node dist/main.js
