@@ -12,10 +12,6 @@ ENV \
 WORKDIR /opt/almond
 ARG ALMOND_VERSION
 
-RUN adduser --disabled-password almond && \
-   chown almond:almond /opt/almond
-WORKDIR /opt/almond
-
 RUN \
     set -x \
     && apt-get update \
@@ -40,7 +36,6 @@ RUN \
         pulseaudio-utils \
         gettext \
         zip \
-        sudo \
         wget \
         gstreamer1.0-plugins-base-apps \
         gstreamer1.0-plugins-good \
@@ -57,16 +52,16 @@ RUN \
     \
     && npm config set unsafe-perm \
     \
-    && sudo -u almond git clone -b "${ALMOND_VERSION}" --depth 1 \
-        "https://github.com/stanford-oval/almond-server" . && \
-    sudo -u almond npm ci && \
-    sudo -u almond npm install --no-package-lock --ignore-scripts snowboy && \
-    cd node_modules/snowboy/ && \
-    sudo -u almond PYTHON=python2 npx node-pre-gyp clean configure && \
-    sudo -u almond make -C build/ && \
-    rm -fr /home/almond/.cache && \
-    rm -fr /home/almond/.npm && \
-    mkdir /home/almond/.cache \
+    && git clone -b "${ALMOND_VERSION}" --depth 1 https://github.com/stanford-oval/almond-server . \
+    && npm ci \
+    && npm install --no-package-lock --ignore-scripts snowboy@1.3.1 \
+    && cd node_modules/snowboy/ \
+    && PYTHON=python2 npx node-pre-gyp clean configure \
+    && make -C build/ \
+    && rm -fr /root/.cache \
+    && rm -fr /root/.npm \
+    && mkdir /root/.cache \
+    \
     && apt-get purge -y --auto-remove \
         build-essential \
         libcanberra-dev \

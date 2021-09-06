@@ -1,11 +1,10 @@
-# Almond Home Assistant Unofficial Add-on Repository
+# Almond Home Assistant OS Add-on Repository
 
-The purpose of this repository is to host the development/testing/pre-release version of the Almond Home Assistant add-on.
+The purpose of this repository is to host the Almond Home Assistant Add-on.
+It contains both the development and the stable version.
 
-The releases are completely detached from the official release of the Almond Home Assistant add-on.
+Add-ons installed through this repository are not supported by Home Assistant.
 
-The official "stable" Almond Home Assistant add-on is integrated into the official Home Assistant add-on store and is available without manually adding this repository.
-
-## How to add this repository to your Home Assistant installation
+## How to add this repository to your Home Assistant OS installation
 
 To install the add-on contained in this repository, please follow the steps in the [documentation](/edge/DOCS.md).
