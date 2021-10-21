@@ -12,8 +12,9 @@ ENV \
 WORKDIR /opt/almond
 ARG ALMOND_VERSION
 
-RUN adduser --disabled-password almond && \
-   chown almond:almond /opt/almond
+RUN adduser --disabled-password almond \
+    && mkdir -p /opt/almond /opt/genie-client \
+    && chown almond:almond /opt/almond
 WORKDIR /opt/almond
 
 RUN \
@@ -89,5 +90,56 @@ RUN \
         /usr/lib/nginx \
         /var/lib/apt/lists/* \
         /var/www
+
+WORKDIR /opt/genie-client
+RUN set -x && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        build-essential \
+        pkg-config \
+        ninja-build \
+        git \
+        wget \
+        meson \
+        libgstreamer1.0-dev \
+        gstreamer1.0-plugins-base \
+        gstreamer1.0-plugins-good \
+        libasound2-dev \
+        libglib2.0-dev \
+        libjson-glib-dev \
+        libsoup2.4-dev \
+        libevdev-dev \
+        libpulse-dev \
+        libspeex-dev \
+        libspeexdsp-dev \
+        libwebrtc-audio-processing-dev \
+        sound-theme-freedesktop && \
+    git clone -b master --depth 1 \
+        "https://github.com/stanford-oval/genie-client-cpp" src && \
+    cd src && \
+    scripts/get-assets.sh && \
+    scripts/build.sh && \
+    cp -rf assets ../ && \
+    cp build/src/genie ../ && \
+    cd .. && \
+    apt-get purge -y --auto-remove \
+        build-essential \
+        pkg-config \
+        ninja-build \
+        git \
+        meson \
+        libgstreamer1.0-dev \
+        libasound2-dev \
+        libglib2.0-dev \
+        libjson-glib-dev \
+        libsoup2.4-dev \
+        libevdev-dev \
+        libpulse-dev \
+        libspeex-dev \
+        libspeexdsp-dev \
+        libwebrtc-audio-processing-dev && \
+    rm -rf \
+        ./src \
+        /opt/genie-client/.[!.]*
 
 COPY rootfs /
