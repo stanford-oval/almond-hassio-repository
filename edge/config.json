@@ -1,6 +1,6 @@
 {
   "name": "Almond - Edge",
-  "version": "edge-5ca06bf",
+  "version": "edge-5ca06bfx",
   "slug": "edge",
   "description": "The home server version of Almond 2.0 (edge builds)",
   "url": "https://github.com/stanford-oval/almond-hassio-repository/blob/master/edge",
@@ -12,5 +12,8 @@
   "panel_icon": "mdi:comment-eye-outline",
   "homeassistant": "0.102.0",
   "homeassistant_api": true,
+  "ports": {
+    "3000/tcp": 3000
+  },
   "image": "stanfordoval/almond-hassio-addon-{arch}"
 }
