@@ -1,10 +1,10 @@
-# Almond Home Assistant OS Addon Repository
+# Almond Home Assistant OS Add-on Repository
 
-The purpose of this repository is to host the Almond Home Assistant Addon.
+The purpose of this repository is to host the Almond Home Assistant Add-on.
 It contains both the development and the stable version.
 
-Addons installed through this repository are not supported by Home Assistant.
+Add-ons installed through this repository are not supported by Home Assistant.
 
 ## How to add this repository to your Home Assistant OS installation
 
-To install the addon contained in this repository, please, follow Home Assistant documentation on how to [Install Third-party Add-ons](https://home-assistant.io/hassio/installing_third_party_addons/)
+To install the add-on contained in this repository, please follow the steps in the [documentation](/edge/DOCS.md).
