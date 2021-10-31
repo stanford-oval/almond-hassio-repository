@@ -1,6 +1,8 @@
 ARG BUILD_FROM
 FROM ${BUILD_FROM}
 
+ARG BUILD_ARCH
+
 # Base env settings
 ENV \
     LANG="en_US.utf8" \
@@ -117,7 +119,7 @@ RUN set -x && \
     git clone -b master --depth 1 \
         "https://github.com/stanford-oval/genie-client-cpp" src && \
     cd src && \
-    scripts/get-assets.sh && \
+    scripts/get-assets.sh ${BUILD_ARCH} && \
     scripts/build.sh && \
     cp -rf assets ../ && \
     cp build/src/genie ../ && \
@@ -138,6 +140,9 @@ RUN set -x && \
         libspeex-dev \
         libspeexdsp-dev \
         libwebrtc-audio-processing-dev && \
+    apt-get install -y \
+        libjson-glib-1.0-0 \
+        libevdev2 && \
     rm -rf \
         ./src \
         /opt/genie-client/.[!.]*
