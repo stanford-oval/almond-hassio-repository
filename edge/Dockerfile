@@ -6,6 +6,7 @@ ARG BUILD_ARCH
 # Base env settings
 ENV \
     LANG="en_US.utf8" \
+    PULSE_SERVER=unix:/run/audio/pulse.sock \
     THINGENGINE_HOME="/data/almond-server" \
     THINGENGINE_HAS_REVERSE_PROXY=true \
     THINGENGINE_HOST_BASED_AUTHENTICATION=insecure \
