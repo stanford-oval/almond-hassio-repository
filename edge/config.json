@@ -12,8 +12,5 @@
   "panel_icon": "mdi:comment-eye-outline",
   "homeassistant": "0.102.0",
   "homeassistant_api": true,
-  "ports": {
-    "3000/tcp": 3000
-  },
   "image": "stanfordoval/almond-hassio-addon-{arch}"
 }
