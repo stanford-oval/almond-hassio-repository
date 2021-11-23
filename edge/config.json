@@ -1,6 +1,6 @@
 {
   "name": "Genie - Edge",
-  "version": "edge-80b8177",
+  "version": "edge-c07df0b",
   "slug": "edge",
   "description": "The Genie voice assistant (edge builds)",
   "url": "https://github.com/stanford-oval/almond-hassio-repository/blob/master/edge",
