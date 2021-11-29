@@ -69,6 +69,7 @@ RUN \
         "https://github.com/stanford-oval/genie-client-cpp" /src \
     && cd /src \
     && git checkout ${GENIE_CLIENT_CPP_VERSION} \
+    && git submodule init --recursive \
     && ./scripts/get-assets.sh ${BUILD_ARCH} \
     && meson build \
     && ninja -C build \
