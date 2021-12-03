@@ -20,8 +20,14 @@ RUN apt-get update && \
         gnupg \
         pulseaudio \
         pulseaudio-utils \
+        libpulse0 \
+        libpulse-mainloop-glib0 \
+        libasound2 \
         libjson-glib-1.0-0 \
         libevdev2 \
+        libsoup2.4-1 \
+        libspeexdsp1 \
+        libwebrtc-audio-processing1 \
         sound-theme-freedesktop \
         unzip \
         sqlite \
@@ -42,7 +48,7 @@ RUN apt-get update && \
     && apt-get install -y --no-install-recommends \
         nodejs
 
-ARG GENIE_CLIENT_CPP_VERSION
+ARG GENIE_CLIENT_VERSION
 
 # Install genie-client
 RUN \
@@ -66,9 +72,9 @@ RUN \
         libspeexdsp-dev \
         libwebrtc-audio-processing-dev \
     && git clone \
-        "https://github.com/stanford-oval/genie-client-cpp" /src \
+        "https://github.com/stanford-oval/genie-client" /src \
     && cd /src \
-    && git checkout ${GENIE_CLIENT_CPP_VERSION} \
+    && git checkout ${GENIE_CLIENT_VERSION} \
     && git submodule init && git submodule update --recursive \
     && ./scripts/get-assets.sh ${BUILD_ARCH} \
     && meson build \
@@ -99,7 +105,7 @@ RUN mkdir /opt/genie-server
 RUN useradd -m genie-server && \
    chown genie-server:genie-server /opt/genie-server
 
-ARG ALMOND_VERSION
+ARG GENIE_SERVER_VERSION
 RUN \
     set -x \
     && apt-get update \
@@ -113,7 +119,7 @@ RUN \
         libpulse-dev \
     && rm -rf /opt/genie-server/node_modules \
     && npm config set unsafe-perm \
-    && su genie-server -c "git clone -b \"${ALMOND_VERSION}\" --depth 1 https://github.com/stanford-oval/genie-server /opt/genie-server" \
+    && su genie-server -c "git clone -b \"${GENIE_SERVER_VERSION}\" --depth 1 https://github.com/stanford-oval/genie-server /opt/genie-server" \
     && cd /opt/genie-server \
     && su genie-server -c 'npm ci' \
     && mkdir -p /home/genie-server/.cache \

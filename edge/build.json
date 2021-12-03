@@ -6,7 +6,7 @@
     "armv7": "homeassistant/armv7-base-debian:buster"
   },
   "args": {
-    "ALMOND_VERSION": "master",
-    "GENIE_CLIENT_CPP_VERSION": "master"
+    "GENIE_SERVER_VERSION": "master",
+    "GENIE_CLIENT_VERSION": "master"
   }
 }
