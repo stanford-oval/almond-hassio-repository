@@ -1,0 +1,18 @@
+version: 2.0.1
+slug: almond-stable
+name: Almond - Stable
+description: The open-source, privacy-preserving voice assistant
+url: https://github.com/stanford-oval/almond-hassio-repository/blob/master/stable
+arch:
+  - armv7
+  - aarch64
+  - amd64
+audio: true
+discovery:
+  - almond
+homeassistant: 0.102.0
+homeassistant_api: true
+image: stanfordoval/almond-hassio-addon-{arch}
+ingress: true
+init: false
+panel_icon: mdi:comment-eye-outline
