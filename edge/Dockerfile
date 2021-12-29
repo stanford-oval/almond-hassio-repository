@@ -30,7 +30,6 @@ RUN apt-get update && \
         libwebrtc-audio-processing1 \
         sound-theme-freedesktop \
         unzip \
-        sqlite \
         coreutils \
         ca-certificates \
         zip \
