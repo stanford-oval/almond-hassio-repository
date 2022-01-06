@@ -10,7 +10,9 @@ ENV \
     THINGENGINE_HOME="/data/almond-server" \
     THINGENGINE_HAS_REVERSE_PROXY=true \
     THINGENGINE_HOST_BASED_AUTHENTICATION=insecure \
-    THINGENGINE_IN_HOME_ASSISTANT_ADDON=true
+    THINGENGINE_IN_HOME_ASSISTANT_ADDON=true \
+    THINGENGINE_NLP_URL=https://nlp-staging.almond.stanford.edu \
+    THINGPEDIA_URL=https://dev.genie.stanford.edu/thingpedia
 
 # Install runtime dependencies
 RUN apt-get update && \
